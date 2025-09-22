@@ -1,5 +1,7 @@
 import { createGameScene } from './scenes/game'
+import { createGameSceneCameraDriven } from './scenes/gameCameraDriven/gameSceneCameraDriven'
 import type { SceneConfig, SceneCreator } from './types/scene'
+import { createGameScenePlayerDriven } from './scenes/gamePlayerDriven'
 
 export class SceneManager {
   private scenes: SceneCreator[]
@@ -10,6 +12,8 @@ export class SceneManager {
 
   constructor() {
     this.scenes = [
+      createGameScenePlayerDriven,
+      createGameSceneCameraDriven,
       createGameScene,
     ]
     this.currentSceneIndex = 0
@@ -164,9 +168,9 @@ export class SceneManager {
     sceneList.innerHTML = `
       <div style="font-size: 12px; color: #888; margin-bottom: 5px;">可用场景：</div>
       <div style="font-size: 12px; line-height: 1.3;">
-        1. 游戏场景<br>
-        2. 基础场景<br>
-        3. 几何体展示<br>
+        1. 角色主导模式<br>
+        2. 相机主导模式<br>
+        3. 基础场景<br>
         4. 光照效果<br>
         5. 粒子系统
       </div>

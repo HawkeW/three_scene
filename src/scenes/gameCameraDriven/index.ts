@@ -1,0 +1,1 @@
+export { createGameSceneCameraDriven as createGameSceneWithGlb } from './gameSceneCameraDriven'

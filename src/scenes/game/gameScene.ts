@@ -17,6 +17,9 @@ export function createGameScene(container: HTMLElement): SceneConfig {
 
   const worldOctree = new Octree();
 
+  const axes = new THREE.AxesHelper(100);
+  scene.add(axes);
+
   // 加载模型
   const loader = new GLTFLoader()
   loader.setPath('/models/gltf/')
@@ -56,7 +59,7 @@ export function createGameScene(container: HTMLElement): SceneConfig {
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setAnimationLoop(animate);
+  renderer.setAnimationLoop(render);
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.VSMShadowMap;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -90,7 +93,7 @@ export function createGameScene(container: HTMLElement): SceneConfig {
     return playerDirection;
   }
 
-  function animate() {
+  function render() {
 
     const deltaTime = Math.min(0.05, clock.getDelta()) / STEPS_PER_FRAME;
 
@@ -145,7 +148,7 @@ export function createGameScene(container: HTMLElement): SceneConfig {
 
       if (keyStates['Space']) {
 
-        playerVelocity.y = 15;
+        playerVelocity.y = 8;
 
       }
 
@@ -252,5 +255,5 @@ export function createGameScene(container: HTMLElement): SceneConfig {
 
   });
 
-  return { scene, camera, renderer, animate, handleResize, name: 'gameScene', description: '游戏场景' }
+  return { scene, camera, renderer, animate: render, handleResize, name: 'gameScene', description: '游戏场景' }
 }
